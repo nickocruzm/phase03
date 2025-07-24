@@ -5,7 +5,7 @@ CFLAGS = -g -Wall -ansi -pedantic -std=c++11
 parser: miniL.lex miniL.y
 	bison -d -v --file-prefix=miniL miniL.y
 	flex miniL.lex
-	g++ $(CFLAGS) -std=c++11 lex.yy.c miniL.tab.c -lfl -o parser
+	g++ $(CFLAGS) -std=c99 lex.yy.c miniL.tab.c -lfl -o parser
 	rm -f lex.yy.c *.output *.tab.c *.tab.h
 
 test: parser
