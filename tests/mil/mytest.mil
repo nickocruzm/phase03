@@ -1,0 +1,72 @@
+.< i
+= k, 0
+= n, 20
+=[] _temp0, t, k
+= _temp0, k
++ _temp1, k, 1
+= k, _temp1
+% _temp2, k, 2
+== _temp3, _temp2, 0
+continue
+?:= _temp3, _label0
+_label0:
+- _temp4, k, 1
+=[] _temp5, t, _temp4
+> _temp5
+< _temp6, k, n
+_label1:
+?:= _temp6, _label1
+< _temp7, i, j
+< _temp8, j, n
+and _temp9, _temp7, _temp8
+>= _temp10, i, 0
+and _temp11, _temp9, _temp10
+=[] _temp12, t, i
+* _temp13, i, 2
+= _temp12, _temp13
+=[] _temp14, t, j
+* _temp15, j, 2
+= _temp14, _temp15
+=[] _temp16, t, i
+= k, _temp16
+=[] _temp17, t, i
+=[] _temp18, t, j
+= _temp17, _temp18
+=[] _temp19, t, j
+= _temp19, k
+>= _temp20, i, j
+or _temp21, _temp20, 0
++ _temp22, 1, i
+- _temp23, _temp22, j
+% _temp24, _temp23, 3
+= k, _temp24
+- _temp25, i, 1
+= i, _temp25
+> _temp26, k, 1
+continue
+?:= _temp26, _label2
+_label2:
+> k
+_label3:
+?:= _temp21, _label4
+:= _label3
+_label4:
+?:= _temp11, _label5
+:= _label6
+_label5:
+_label6:
+> i
+< _temp27, i, n
+>= _temp28, i, 0
+and _temp29, _temp27, _temp28
+=[] _temp30, t, i
+> _temp30
+?:= _temp29, _label7
+_label7:
+< _temp31, j, n
+>= _temp32, j, 0
+and _temp33, _temp31, _temp32
+=[] _temp34, t, j
+> _temp34
+?:= _temp33, _label8
+_label8:

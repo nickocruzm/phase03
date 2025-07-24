@@ -1,0 +1,59 @@
+.< n
+= x, n
+/ _temp0, n, x
+> _temp1, x, _temp0
+/ _temp2, n, x
++ _temp3, x, _temp2
+/ _temp4, _temp3, 2
+= x, _temp4
+_label0:
+?:= _temp1, _label1
+:= _label0
+_label1:
+= sqrt_n, x
+= i, 2
+<= _temp5, i, n
+=[] _temp6, a, i
+= _temp6, 0
++ _temp7, i, 1
+= i, _temp7
+_label2:
+?:= _temp5, _label3
+:= _label2
+_label3:
+= i, 2
+<= _temp8, i, sqrt_n
+=[] _temp9, a, i
+== _temp10, _temp9, 0
++ _temp11, i, i
+= j, _temp11
+<= _temp12, j, n
+=[] _temp13, a, j
+= _temp13, 1
++ _temp14, j, i
+= j, _temp14
+_label4:
+?:= _temp12, _label5
+:= _label4
+_label5:
+?:= _temp10, _label6
+_label6:
++ _temp15, i, 1
+= i, _temp15
+_label7:
+?:= _temp8, _label8
+:= _label7
+_label8:
+= i, 2
+<= _temp16, i, n
+=[] _temp17, a, i
+== _temp18, _temp17, 0
+> i
+?:= _temp18, _label9
+_label9:
++ _temp19, i, 1
+= i, _temp19
+_label10:
+?:= _temp16, _label11
+:= _label10
+_label11:

@@ -1,22 +1,35 @@
 CC = gcc
-CFLAGS = -g -O0 -std=c99
+CFLAGS = -g -Wall -ansi -pedantic -std=c++11 
+#CFLAGS = -g -O0 -std=c99
 
-mini_l: mini_l-lex.o mini_l-parser.o
+parser: miniL.lex miniL.y
+	bison -d -v --file-prefix=miniL miniL.y
+	flex miniL.lex
+	g++ $(CFLAGS) -std=c++11 lex.yy.c miniL.tab.c -lfl -o parser
+	rm -f lex.yy.c *.output *.tab.c *.tab.h
 
+test: parser
+	cat ./tests/min/primes.min | ./parser > ./tests/mil/primes.mil
+	cat ./tests/min/mytest.min | ./parser > ./tests/mil/mytest.mil
+	cat ./tests/min/A.min | ./parser > ./tests/mil/A.mil
+	cat ./tests/min/fibonacci.min | ./parser > ./tests/mil/fibonacci.mil
+
+# 	cat ./tests/min/errors.min | ./parser > ./tests/mil/errors.mil
+# 	cat ./tests/min/for.min | ./parser > ./tests/mil/for.mil
+
+miniL: miniL-lex.o miniL-parser.o
 	$(CC) $^ -o $@ -lfl
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-mini_l-lex.c: mini_l.lex mini_l-parser.c
+miniL-lex.c: miniL.lex miniL-parser.c
 	flex -o $@ $< 
 
-mini_l-parser.c: mini_l.y
+miniL-parser.c: miniL.y
 
 	bison -d -v -g -o $@ $<
 
-
-
 clean:
-	rm -f *.o mini_l-lex.c mini_l-parser.c mini_l-parser.h *.output *.dot mini_l
+	rm -f *.o miniL-lex.c miniL-parser.c miniL-parser.h *.output *.dot miniL
 

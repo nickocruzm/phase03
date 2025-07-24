@@ -3,7 +3,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
-    #include "mini_l-parser.h"
+    #include "miniL.tab.h"
 
     int line = 1;
     int column = 1;
@@ -17,6 +17,7 @@
     column += length;
     }
 
+
 %}
 
 %option noyywrap
@@ -28,7 +29,7 @@
 "beginparams"   { change_column(yyleng); return BEGINPARAMS; }
 "endparams"     { change_column(yyleng); return ENDPARAMS; }
 "beginlocals"   { change_column(yyleng); return BEGINLOCALS; }
-"endlocals"     { change_column(yyleng); return ENDLOCALS; }
+"endlocals"    { change_column(yyleng); return ENDLOCALS; }
 "beginbody"     { change_column(yyleng); return BEGINBODY; }
 "endbody"       { change_column(yyleng); return ENDBODY; }
 "integer"       { change_column(yyleng); return INTEGER; }
@@ -53,8 +54,10 @@
 "true"          { change_column(yyleng); return TRUE; }
 "false"         { change_column(yyleng); return FALSE; }
 "return"        { change_column(yyleng); return RETURN; }
+
+
 ":="            { change_column(yyleng); return ASSIGN; }
-"=="            { change_column(yyleng); return EQ; }
+"=="            { change_column(yyleng); return EQ;}
 "<>"            { change_column(yyleng); return NEQ; }
 "<="            { change_column(yyleng); return LTE; }
 ">="            { change_column(yyleng); return GTE; }
@@ -65,7 +68,7 @@
 "*"             { change_column(yyleng); return MULT; }
 "/"             { change_column(yyleng); return DIV; }
 "%"             { change_column(yyleng); return MOD; }
-";"             { change_column(yyleng); return SEMICOLON; }
+";"              { change_column(yyleng); return SEMICOLON; }
 ":"             { change_column(yyleng); return COLON; }
 ","             { change_column(yyleng); return COMMA; }
 "("             { change_column(yyleng); return L_PAREN; }

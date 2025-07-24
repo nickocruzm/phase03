@@ -6,8 +6,9 @@
     extern int yylex();
     extern int yylineno;
     extern char* yytext;
-
+    extern FILE* yyin;
 %}
+
 
 %union{
     char* str_val;
@@ -48,23 +49,19 @@
 
 %%
 
-program: functions
-       {
-           printf("program -> functions\n");
-       }
-       ;
+program: functions;
 
-functions: function
-         {
-             printf("functions -> function\n");
-         }
-         | functions function
-         {
-             printf("functions -> functions function\n");
-         }
-         ;
+functions: /*empty*/
+        |function functions
+        {
+            printf("functions -> function functions\n");
+        }
+        ;
 
-function: FUNCTION IDENTIFIER SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY
+function: FUNCTION IDENTIFIER SEMICOLON 
+BEGINPARAMS declarations ENDPARAMS 
+BEGINLOCALS declarations ENDLOCALS 
+BEGINBODY statements ENDBODY
         {
             printf("function -> FUNCTION IDENTIFIER SEMICOLON BEGINPARAMS declarations ENDPARAMS BEGINLOCALS declarations ENDLOCALS BEGINBODY statements ENDBODY\n");
         }
@@ -74,7 +71,7 @@ declarations: /* empty */
             {
                 printf("declarations -> epsilon\n");
             }
-            | declarations declaration
+            | declaration SEMICOLON declarations
             {
                 printf("declarations -> declarations declaration\n");
             }
@@ -330,7 +327,13 @@ expressions: /* empty */
 
 %%
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv){
+    if(argc > 1){
+        yyin = fopen(argv[1], "r");
+        if(yyin == NULL){
+            printf("syntax %s filename\n", argv[0]);
+        }
+    }
     yyparse();
     return 0;
 }
